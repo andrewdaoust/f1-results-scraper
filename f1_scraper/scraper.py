@@ -6,6 +6,12 @@ import helpers
 
 BASE_URL = "https://www.formula1.com"
 
+# =======================================================================================
+#
+#                               HTML Requests and extraction
+#
+# =======================================================================================
+
 def get_main_page(year = None, result_type = "races"):
     if year != None:
         url = f"{BASE_URL}/en/results/{year}/{result_type}"
@@ -27,6 +33,11 @@ def get_result_page(year, race_stub, session_stub = "race-result"):
     main = soup.main
     return main
 
+# =======================================================================================
+#
+#                                   `years` command
+#
+# =======================================================================================
 
 def get_years():
     main = get_main_page()
@@ -38,6 +49,11 @@ def get_years():
     # Extract them. We cna just use the year itself to build the URL when we need it
     return [year.string for year in years_html.find_all('a')]
 
+# =======================================================================================
+#
+#                                   `races` command
+#
+# =======================================================================================
 
 def get_races(year):
     main = get_main_page(year=year)
@@ -64,6 +80,11 @@ def get_races(year):
         races.append(f"{race_num}/{location}")
     return races
 
+# =======================================================================================
+#
+#                                   `results` command
+#
+# =======================================================================================
 
 def parse_result_table(main):
     table = main.table
@@ -117,6 +138,11 @@ def get_result(year, race_stub, session_stub):
         print("Invalid session for this race. No results.")
         sys.exit(1)
 
+# =======================================================================================
+#
+#                                   `season-results` command
+#
+# =======================================================================================
 
 def get_season_result(year, result_type):
     main = get_main_page(year, result_type)
@@ -127,6 +153,11 @@ def get_season_result(year, result_type):
         print("Invalid season. No results.")
         sys.exit(1)
 
+# =======================================================================================
+#
+#                                   `weekend-sessions` command
+#
+# =======================================================================================
 
 def get_weekend_sessions(year, race_stub):
     main = get_result_page(year, race_stub)

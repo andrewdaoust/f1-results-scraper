@@ -6,21 +6,19 @@ import sys
 app = typer.Typer()
 
 @app.command()
-def years():
+def years(output_file: str | None = None):
     year = scraper.get_years()
-    for y in year:
-        typer.echo(y)
+    helpers.json_output(year, output_file)
 
 
 @app.command()
-def races(year: str):
+def races(year: str, output_file: str | None = None):
     races = scraper.get_races(year)
-    for r in races:
-        typer.echo(r)
+    helpers.json_output(races, output_file)
 
 
 @app.command()
-def result(year: str, race_stub: str, session: str = "race"):
+def result(year: str, race_stub: str, session: str = "race", output_file: str | None = None):
     match session:
         # Race
         case "race":
@@ -53,11 +51,11 @@ def result(year: str, race_stub: str, session: str = "race"):
             typer.echo("Invalid session name")
             sys.exit(1)
 
-    helpers.json_string(results)
+    helpers.json_output(results, output_file)
 
 
 @app.command()
-def season_result(year: str, result_type: str = "drivers"):
+def season_result(year: str, result_type: str = "drivers", output_file: str | None = None):
     match result_type:
         case "drivers":
             results = scraper.get_season_result(year, "drivers")
@@ -70,14 +68,13 @@ def season_result(year: str, result_type: str = "drivers"):
         case _:
             typer.echo("Invalid result type. Try 'drivers', 'constructors', 'races', or 'fastest-laps'.")
             sys.exit(1)
-    helpers.json_string(results)
+    helpers.json_output(results, output_file)
 
 
 @app.command()
-def weekend_sessions(year: str, race_stub: str):
+def weekend_sessions(year: str, race_stub: str, output_file: str | None = None):
     sessions = scraper.get_weekend_sessions(year, race_stub)
-    for session in sessions:
-        typer.echo(session)
+    helpers.json_output(sessions, output_file)
 
 
 if __name__ == "__main__":
