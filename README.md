@@ -11,5 +11,5 @@ pip install -r requirements.txt
 Then run the CLI:
 
 ```bash
-python main.py --help
+python f1_scraper/cli.py --help
 ```

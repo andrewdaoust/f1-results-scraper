@@ -12,6 +12,7 @@ def json_file(data, filename, indent=2):
 # def reencode_unicode_escape(string):
 #     return string.encode('unicode_escape').decode('unicode_escape')
 
+
 def to_camel_case(snake_str, sep: str = "_"):
     first, *others = snake_str.split(sep)
     return ''.join([first.lower(), *map(str.title, others)])

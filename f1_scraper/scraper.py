@@ -1,6 +1,7 @@
-from bs4 import BeautifulSoup
-import requests
 import sys
+import requests
+from bs4 import BeautifulSoup
+
 import helpers
 
 BASE_URL = "https://www.formula1.com"
