@@ -1,9 +1,12 @@
+import sys
 import typer
+
 import scraper
 import helpers
-import sys
+
 
 app = typer.Typer()
+
 
 @app.command()
 def years(output_file: str | None = None):

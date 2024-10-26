@@ -1,5 +1,6 @@
 import json
 
+
 def json_string(data):
     print(json.dumps(data, indent=2))
 
